@@ -510,55 +510,63 @@ section {
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Decorative Vintage Border Frame */
+/* Ornate Green & Gold Border Frame - Luxury Style */
 .frame-image-wrapper {
   position: relative;
   z-index: 5;
-  margin: 20px;
-  padding: 15px;
-  border-radius: 8px;
+  margin: 25px;
+  padding: 0;
+  border-radius: 12px;
   background: #ffffff;
-  /* Double border effect */
-  border: 2px solid #8b7355;
+  /* Multi-layered ornate border */
+  border: 10px solid #15803d;
   box-shadow: 
-    inset 0 0 0 6px #ffffff,
-    inset 0 0 0 8px #d4af37,
-    0 4px 12px rgba(0, 0, 0, 0.1);
+    /* Inner cream/beige border */
+    inset 0 0 0 4px #f5f5dc,
+    /* Green inner layer for depth */
+    inset 0 0 0 14px #15803d,
+    /* Subtle gold outer accent */
+    0 0 0 2px #d4af37,
+    /* Gold glow */
+    0 0 0 4px rgba(212, 175, 55, 0.2),
+    /* Depth shadow */
+    0 10px 30px rgba(0, 0, 0, 0.15);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: visible;
+  overflow: hidden;
 }
 
-/* Corner decorations using pseudo-elements */
+/* Decorative corner embellishments */
 .frame-image-wrapper::before,
 .frame-image-wrapper::after {
   content: '';
   position: absolute;
-  width: 40px;
-  height: 40px;
-  border: 2px solid #d4af37;
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, #d4af37 0%, #f5f5dc 40%, #d4af37 100%);
   z-index: 10;
+  opacity: 0.7;
+  border: 3px solid #15803d;
 }
 
-/* Top corners */
+/* Top-left corner ornament */
 .frame-image-wrapper::before {
-  top: -2px;
-  left: -2px;
-  border-right: none;
-  border-bottom: none;
-  border-top-left-radius: 8px;
+  top: -5px;
+  left: -5px;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+  border-radius: 12px 0 0 0;
 }
 
+/* Top-right corner ornament */
 .frame-image-wrapper::after {
-  top: -2px;
-  right: -2px;
-  border-left: none;
-  border-bottom: none;
-  border-top-right-radius: 8px;
+  top: -5px;
+  right: -5px;
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+  border-radius: 0 12px 0 0;
 }
 
 /* Image Inner Container */
 .frame-image-inner {
-  border-radius: 20px;
+  border-radius: 12px;
   overflow: hidden;
   position: relative;
   width: 100%;
