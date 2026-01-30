@@ -302,16 +302,14 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="relative h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-full bg-white border border-green-100 flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow duration-300">
-                  <Image 
-                    src="/icons/dakshamani_logo.png" 
-                    alt="Dakshamani Logo" 
-                    width={56}
-                    height={56}
-                    className="object-contain"
-                    priority
-                  />
-                </div>
+                <Image 
+                  src="/icons/dakshamani_logo.png" 
+                  alt="Dakshamani Logo" 
+                  width={56}
+                  height={56}
+                  className="object-contain drop-shadow-lg hover:drop-shadow-xl transition-all duration-300"
+                  priority
+                />
               </motion.div>
               <div className="hidden md:block">
                 <h1 className="text-base font-semibold text-green-800 tracking-tight">
