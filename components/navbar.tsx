@@ -302,8 +302,15 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="h-8 w-8 md:h-10 md:w-10 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center">
-                  <span className="text-white font-bold text-sm md:text-base">D</span>
+                <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center">
+                  <Image 
+                    src="/icons/dakshamani_logo.png" 
+                    alt="Dakshamani Logo" 
+                    width={40}
+                    height={40}
+                    className="object-contain p-0.5"
+                    priority
+                  />
                 </div>
               </motion.div>
               <div className="hidden md:block">

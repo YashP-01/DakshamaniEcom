@@ -17,6 +17,7 @@ import {
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/hooks/use-toast";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function CustomerLogin() {
   const router = useRouter();
@@ -89,9 +90,9 @@ export default function CustomerLogin() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="h-16 w-16 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg"
+                className="relative h-16 w-16 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg overflow-hidden"
               >
-                <Leaf className="h-8 w-8 text-white" />
+                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={64} height={64} className="object-contain p-2" />
               </motion.div>
               <div className="text-center">
                 <CardTitle className="text-3xl font-bold text-gray-900 mb-2">

@@ -3,6 +3,7 @@
 import { motion } from "framer-motion";
 import { Facebook, Instagram, Twitter, Mail, Phone, MapPin, Leaf } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function Footer() {
   return (
@@ -32,9 +33,9 @@ export default function Footer() {
               <motion.div
                 whileHover={{ scale: 1.05, rotate: 5 }}
                 transition={{ duration: 0.2 }}
-                className="h-12 w-12 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg"
+                className="relative h-12 w-12 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg overflow-hidden"
               >
-                <Leaf className="h-6 w-6 text-white" />
+                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={48} height={48} className="object-contain p-1" />
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
                 Dakshamani
@@ -158,8 +159,8 @@ export default function Footer() {
               
               {/* Logo in business card */}
               <div className="flex items-center space-x-3 mb-6 relative z-10">
-                <div className="h-10 w-10 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-md">
-                  <Leaf className="h-5 w-5 text-white" />
+                <div className="relative h-10 w-10 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-md overflow-hidden">
+                  <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={40} height={40} className="object-contain p-0.5" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900 tracking-tight">Contact Us</h4>
