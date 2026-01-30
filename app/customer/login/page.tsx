@@ -90,7 +90,7 @@ export default function CustomerLogin() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="relative h-20 w-20 rounded-lg bg-white border-2 border-green-100 flex items-center justify-center shadow-lg overflow-hidden"
+                className="relative h-20 w-20 rounded-full bg-white border-2 border-green-100 flex items-center justify-center shadow-2xl overflow-hidden"
               >
                 <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={80} height={80} className="object-contain p-2" />
               </motion.div>

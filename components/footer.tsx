@@ -33,7 +33,7 @@ export default function Footer() {
               <motion.div
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="relative h-16 w-16 rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-md overflow-hidden"
+                className="relative h-16 w-16 rounded-full bg-white border border-green-100 flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow duration-300 overflow-hidden"
               >
                 <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={64} height={64} className="object-contain p-1" />
               </motion.div>
@@ -159,7 +159,7 @@ export default function Footer() {
               
               {/* Logo in business card */}
               <div className="flex items-center space-x-3 mb-6 relative z-10">
-                <div className="relative h-14 w-14 rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-md overflow-hidden">
+                <div className="relative h-14 w-14 rounded-full bg-white border border-green-100 flex items-center justify-center shadow-xl overflow-hidden">
                   <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={56} height={56} className="object-contain p-1" />
                 </div>
                 <div>

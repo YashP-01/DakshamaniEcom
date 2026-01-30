@@ -302,7 +302,7 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="relative h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-sm">
+                <div className="relative h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-full bg-white border border-green-100 flex items-center justify-center shadow-xl hover:shadow-2xl transition-shadow duration-300">
                   <Image 
                     src="/icons/dakshamani_logo.png" 
                     alt="Dakshamani Logo" 
