@@ -237,7 +237,7 @@ export default function ProductCard({ product }: { product: Product }) {
 
             {/* Quick Actions - Appear on Hover */}
             <div
-              className="absolute bottom-2.5 left-2.5 right-2.5 flex gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
+              className="absolute bottom-2.5 left-2.5 right-2.5 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 z-10"
               style={{ pointerEvents: "auto" }}
             >
               <button
