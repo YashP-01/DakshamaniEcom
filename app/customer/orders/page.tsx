@@ -41,6 +41,7 @@ interface Order {
   shipping_country?: string;
   shipping_phone?: string;
   subtotal?: number;
+  total?: number;
   shipping_cost?: number;
   tax_amount?: number;
   discount_amount?: number;

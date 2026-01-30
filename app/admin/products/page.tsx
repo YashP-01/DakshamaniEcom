@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "@/hooks/use-toast";
+import { useAdminAuth } from "@/hooks/use-admin-auth";
 import Link from "next/link";
 
 interface Product {
@@ -40,6 +41,10 @@ interface Product {
   homepage_display_order?: number;
   has_variants?: boolean;
   variant_count?: number;
+  is_featured?: boolean;
+  meta_title?: string;
+  meta_description?: string;
+  tags?: string[];
 }
 
 export default function AdminProducts() {

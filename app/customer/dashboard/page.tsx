@@ -57,6 +57,16 @@ interface Order {
   estimated_delivery_date?: string;
 }
 
+interface OrderItem {
+  id: string;
+  order_id: string;
+  product_name: string;
+  product_image_url?: string;
+  product_price: number;
+  quantity: number;
+  subtotal: number;
+}
+
 export default function CustomerDashboard() {
   const router = useRouter();
   const [customer, setCustomer] = useState<Customer | null>(null);

@@ -37,6 +37,8 @@ interface Order {
   id: string;
   order_number: string;
   customer_name: string;
+  customer_email?: string;
+  customer_phone?: string;
   shipping_address: string;
   shipping_city: string;
   shipping_state: string;

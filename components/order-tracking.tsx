@@ -12,12 +12,16 @@ interface TrackingData {
     shipment_track?: Array<{
       tracking_date?: string;
       tracking_time?: string;
+      date?: string;
       status?: string;
+      activity?: string;
       location?: string;
       courier_name?: string;
     }>;
     shipment_track_activities?: Array<{
       date?: string;
+      tracking_date?: string;
+      tracking_time?: string;
       status?: string;
       activity?: string;
       location?: string;

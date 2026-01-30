@@ -55,7 +55,7 @@ export default function ProductSuggestions({
             .neq("product_id", currentProductId);
 
           if (orderItems && orderItems.length > 0) {
-            const purchasedProductIds = [...new Set(orderItems.map((oi: any) => oi.product_id))];
+            const purchasedProductIds = Array.from(new Set(orderItems.map((oi: any) => oi.product_id)));
             
             // Get categories from purchased products
             const { data: purchasedProducts } = await supabase
@@ -63,7 +63,7 @@ export default function ProductSuggestions({
               .select("category")
               .in("id", purchasedProductIds);
             
-            const purchasedCategories = [...new Set((purchasedProducts || []).map((p: any) => p.category).filter(Boolean))];
+            const purchasedCategories = Array.from(new Set((purchasedProducts || []).map((p: any) => p.category).filter(Boolean)));
 
             // Get products from same categories as purchased items (high priority - score 10)
             if (purchasedCategories.length > 0) {

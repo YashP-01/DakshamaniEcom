@@ -144,15 +144,17 @@ export function initSmoothScroll(): void {
 
   // Handle programmatic navigation
   const originalScrollTo = window.scrollTo;
-  window.scrollTo = function(options?: ScrollToOptions | number, y?: number) {
-    if (typeof options === 'object' && options?.behavior === 'smooth') {
-      if (typeof options.top === 'number') {
-        smoothScrollTo(options.top, { duration: 800 });
+  window.scrollTo = function(optionsOrX?: ScrollToOptions | number, y?: number) {
+    if (typeof optionsOrX === 'object' && optionsOrX?.behavior === 'smooth') {
+      if (typeof optionsOrX.top === 'number') {
+        smoothScrollTo(optionsOrX.top, { duration: 800 });
       } else {
-        originalScrollTo.call(this, options, y);
+        (originalScrollTo as any).call(this, optionsOrX);
       }
-    } else {
-      originalScrollTo.call(this, options as any, y);
+    } else if (typeof optionsOrX === 'number') {
+      (originalScrollTo as any).call(this, optionsOrX, y || 0);
+    } else if (optionsOrX) {
+      (originalScrollTo as any).call(this, optionsOrX);
     }
   };
 }
