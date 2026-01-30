@@ -31,11 +31,11 @@ export default function Footer() {
           >
             <div className="flex items-center space-x-3 mb-6">
               <motion.div
-                whileHover={{ scale: 1.05, rotate: 5 }}
+                whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
-                className="relative h-12 w-12 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg overflow-hidden"
+                className="relative h-16 w-16 rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-md overflow-hidden"
               >
-                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={48} height={48} className="object-contain p-1" />
+                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={64} height={64} className="object-contain p-1" />
               </motion.div>
               <h3 className="text-2xl font-bold text-gray-900 tracking-tight">
                 Dakshamani
@@ -159,8 +159,8 @@ export default function Footer() {
               
               {/* Logo in business card */}
               <div className="flex items-center space-x-3 mb-6 relative z-10">
-                <div className="relative h-10 w-10 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-md overflow-hidden">
-                  <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={40} height={40} className="object-contain p-0.5" />
+                <div className="relative h-14 w-14 rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-md overflow-hidden">
+                  <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={56} height={56} className="object-contain p-1" />
                 </div>
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900 tracking-tight">Contact Us</h4>

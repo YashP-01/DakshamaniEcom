@@ -141,9 +141,9 @@ export default function CustomerRegister() {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-                className="relative h-16 w-16 rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center shadow-lg overflow-hidden"
+                className="relative h-20 w-20 rounded-lg bg-white border-2 border-green-100 flex items-center justify-center shadow-lg overflow-hidden"
               >
-                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={64} height={64} className="object-contain p-2" />
+                <Image src="/icons/dakshamani_logo.png" alt="Dakshamani Logo" width={80} height={80} className="object-contain p-2" />
               </motion.div>
               <div className="text-center">
                 <CardTitle className="text-3xl font-bold text-gray-900 mb-2">

@@ -302,13 +302,13 @@ export default function Navbar() {
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.2 }}
               >
-                <div className="relative h-8 w-8 md:h-10 md:w-10 overflow-hidden rounded-full bg-gradient-to-br from-green-500 via-green-600 to-green-700 flex items-center justify-center">
+                <div className="relative h-12 w-12 md:h-14 md:w-14 overflow-hidden rounded-lg bg-white border border-green-100 flex items-center justify-center shadow-sm">
                   <Image 
                     src="/icons/dakshamani_logo.png" 
                     alt="Dakshamani Logo" 
-                    width={40}
-                    height={40}
-                    className="object-contain p-0.5"
+                    width={56}
+                    height={56}
+                    className="object-contain"
                     priority
                   />
                 </div>
