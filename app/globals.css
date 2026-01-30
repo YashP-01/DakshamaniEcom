@@ -510,20 +510,50 @@ section {
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Modern Elevated Card Container */
+/* Decorative Vintage Border Frame */
 .frame-image-wrapper {
   position: relative;
   z-index: 5;
-  margin: 0;
-  border-radius: 20px;
+  margin: 20px;
+  padding: 15px;
+  border-radius: 8px;
   background: #ffffff;
+  /* Double border effect */
+  border: 2px solid #8b7355;
   box-shadow: 
-    0 1px 3px rgba(0, 0, 0, 0.05),
-    0 4px 12px rgba(0, 0, 0, 0.08),
-    0 16px 40px -8px rgba(0, 0, 0, 0.1);
+    inset 0 0 0 6px #ffffff,
+    inset 0 0 0 8px #d4af37,
+    0 4px 12px rgba(0, 0, 0, 0.1);
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.06);
+  overflow: visible;
+}
+
+/* Corner decorations using pseudo-elements */
+.frame-image-wrapper::before,
+.frame-image-wrapper::after {
+  content: '';
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  border: 2px solid #d4af37;
+  z-index: 10;
+}
+
+/* Top corners */
+.frame-image-wrapper::before {
+  top: -2px;
+  left: -2px;
+  border-right: none;
+  border-bottom: none;
+  border-top-left-radius: 8px;
+}
+
+.frame-image-wrapper::after {
+  top: -2px;
+  right: -2px;
+  border-left: none;
+  border-bottom: none;
+  border-top-right-radius: 8px;
 }
 
 /* Image Inner Container */
