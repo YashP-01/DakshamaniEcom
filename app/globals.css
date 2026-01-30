@@ -421,9 +421,10 @@ section {
 }
 
 /* Product Image Frame - Multiple Border Lines Design */
+/* Modern Elevated Card Frame */
 .product-image-frame {
   position: relative;
-  padding: 20px;
+  padding: 0;
   isolation: isolate;
 }
 
@@ -509,37 +510,41 @@ section {
     inset 0 1px 0 rgba(255, 255, 255, 0.3);
 }
 
-/* Image Wrapper - Floating Container */
+/* Modern Elevated Card Container */
 .frame-image-wrapper {
   position: relative;
   z-index: 5;
-  margin: 25px;
-  border-radius: 16px;
+  margin: 0;
+  border-radius: 20px;
   background: #ffffff;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9), inset 0 -1px 0 rgba(0, 0, 0, 0.05);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 
+    0 1px 3px rgba(0, 0, 0, 0.05),
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 16px 40px -8px rgba(0, 0, 0, 0.1);
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 /* Image Inner Container */
 .frame-image-inner {
-  border-radius: 16px;
+  border-radius: 20px;
   overflow: hidden;
   position: relative;
   width: 100%;
   height: 100%;
+  background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
 }
 
-/* Hover Effects - Subtle and Professional */
+/* Hover Effects - Clean Elevation */
 .product-image-frame:hover .frame-image-wrapper {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.18),
-    0 8px 20px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    0 0 0 1px rgba(34, 197, 94, 0.1);
-  border-color: rgba(34, 197, 94, 0.15);
+  transform: translateY(-8px);
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.06),
+    0 8px 20px rgba(0, 0, 0, 0.1),
+    0 24px 56px -12px rgba(0, 0, 0, 0.15),
+    0 0 0 1px rgba(34, 197, 94, 0.08);
+  border-color: rgba(34, 197, 94, 0.12);
 }
 
 .product-image-frame:hover .frame-border-outer {
