@@ -152,7 +152,7 @@ export default function Footer() {
             transition={{ duration: 0.5, delay: 0.3 }}
             className="lg:col-span-1"
           >
-            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200/50 hover:shadow-xl transition-all duration-300 relative overflow-hidden group">
+            <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200/50 hover:shadow-xl transition-all duration-300 relative overflow-hidden group -mt-1">
               {/* Decorative corner accent */}
               <div className="absolute top-0 right-0 w-20 h-20 bg-gradient-to-br from-green-500/10 to-transparent rounded-bl-full"></div>
               
