@@ -512,7 +512,7 @@ export default function ProductDetailPage() {
         <Navbar />
         <div className="pt-32 pb-12 md:pt-40 md:pb-16 lg:pt-44">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1920px]">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 lg:pl-8">
               <div className="relative">
                 {/* Frame Container with Multiple Border Lines */}
                 <div className="product-image-frame">
