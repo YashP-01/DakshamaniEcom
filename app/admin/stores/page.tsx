@@ -539,6 +539,19 @@ export default function AdminStores() {
               </div>
             </div>
 
+            <div>
+              <Label htmlFor="serviceable_pincodes">Serviceable Pincodes (Delivery Zones)</Label>
+              <Input
+                id="serviceable_pincodes"
+                value={formData.serviceable_pincodes}
+                onChange={(e) => setFormData({ ...formData, serviceable_pincodes: e.target.value })}
+                placeholder="e.g., 560001, 560002, 560003"
+              />
+              <p className="text-xs text-gray-500 mt-1">
+                Enter comma-separated pincodes that this store can deliver to
+              </p>
+            </div>
+
             <div className="grid grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="latitude">Latitude (optional)</Label>
