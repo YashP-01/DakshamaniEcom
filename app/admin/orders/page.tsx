@@ -39,8 +39,13 @@ interface Order {
   tracking_url: string | null;
   shiprocket_order_id: string | null;
   shiprocket_shipment_id: string | null;
+  shiprocket_shipment_id: string | null;
   created_at: string;
   admin_notes?: string;
+  store_id?: string | null;
+  stores?: {
+    name: string;
+  } | null;
 }
 
 interface OrderItem {
@@ -85,7 +90,7 @@ export default function AdminOrders() {
     
     const { data, error } = await supabase
       .from("orders")
-      .select("*")
+      .select("*, stores(name)")
       .order("created_at", { ascending: false });
 
     if (error) {
@@ -339,6 +344,25 @@ export default function AdminOrders() {
                   </div>
                 </CardHeader>
                 <CardContent>
+                  {order.stores && (
+                    <div className="mb-6 bg-blue-50 border border-blue-100 rounded-lg p-3 flex items-center gap-2">
+                       <MapPin className="h-5 w-5 text-blue-600" />
+                       <div>
+                         <p className="text-xs text-blue-600 font-medium uppercase tracking-wide">Fulfilled By</p>
+                         <p className="font-semibold text-blue-900">{order.stores.name}</p>
+                       </div>
+                    </div>
+                  )}
+                  {!order.stores && (
+                    <div className="mb-6 bg-gray-50 border border-gray-100 rounded-lg p-3 flex items-center gap-2">
+                       <Package className="h-5 w-5 text-gray-500" />
+                       <div>
+                         <p className="text-xs text-gray-500 font-medium uppercase tracking-wide">Fulfilled By</p>
+                         <p className="font-semibold text-gray-700">Central Warehouse</p>
+                       </div>
+                    </div>
+                  )}
+
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {/* Customer Info */}
                     <div>
