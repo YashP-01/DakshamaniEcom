@@ -427,7 +427,7 @@ export default function CheckoutPage() {
       />
       <div className="min-h-screen bg-[#f5f5f0]">
         <Navbar />
-        <div className="pt-20 pb-16">
+        <div className="pt-32 pb-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-16 max-w-[1920px]">
             <h1 className="text-3xl font-bold mb-8">Checkout</h1>
             <form onSubmit={handleSubmit}>
