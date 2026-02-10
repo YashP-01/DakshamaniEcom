@@ -39,7 +39,6 @@ interface Order {
   tracking_url: string | null;
   shiprocket_order_id: string | null;
   shiprocket_shipment_id: string | null;
-  shiprocket_shipment_id: string | null;
   created_at: string;
   admin_notes?: string;
   store_id?: string | null;
