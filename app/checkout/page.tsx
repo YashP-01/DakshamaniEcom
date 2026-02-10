@@ -145,7 +145,10 @@ export default function CheckoutPage() {
   // Check for store fulfillment when pincode changes
   useEffect(() => {
     if (formData.pincode && formData.pincode.length >= 6 && stores.length > 0) {
+      console.log("Checking pincode:", formData.pincode);
+      console.log("Available stores:", stores);
       const store = findStoreByPincode(formData.pincode, stores);
+      console.log("Found store:", store);
       setFulfillmentStore(store);
     } else {
       setFulfillmentStore(null);
