@@ -267,6 +267,7 @@ export async function PUT(request: NextRequest) {
         customer_name: orderData.name,
         customer_email: orderData.email,
         customer_phone: orderData.phone,
+        store_id: orderData.storeId || null,
         shipping_address_id: shippingAddressId,
         shipping_full_name: orderData.name,
         shipping_address: orderData.address,

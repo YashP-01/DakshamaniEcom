@@ -364,6 +364,7 @@ export default function CheckoutPage() {
               totalAmount: currentSubtotal,
               finalAmount: currentTotal,
               shippingAddressId: selectedAddressId,
+              storeId: fulfillmentStore?.id || null,
             },
               }),
             });
