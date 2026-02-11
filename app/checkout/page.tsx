@@ -130,7 +130,7 @@ export default function CheckoutPage() {
       const supabase = createClient();
       const { data } = await supabase
         .from("stores")
-        .select("id, name, serviceable_pincodes")
+        .select("*")
         .eq("is_active", true);
       
       if (data) {
@@ -738,6 +738,18 @@ export default function CheckoutPage() {
           </div>
         </div>
         <Footer />
+      </div>
+      
+      {/* Debug: Stores Data */}
+      <div className="container mx-auto px-4 py-8 mt-8 border-t border-gray-200">
+        <h3 className="text-sm font-bold text-red-500 mb-2">Debug Info (Remove after fixing)</h3>
+        <pre className="bg-gray-100 p-4 rounded text-xs overflow-auto max-h-60">
+          {JSON.stringify({ 
+            userPincode: formData.pincode,
+            storesCount: stores.length,
+            stores: stores 
+          }, null, 2)}
+        </pre>
       </div>
     </>
   );
