@@ -18,10 +18,11 @@ export function findStoreByPincode(pincode: string, stores: StoreLocation[]): St
 
   const cleanPincode = pincode.trim();
 
-  // Find a store that has the pincode in its serviceable_pincodes list
+  // Find a store that has the pincode in its serviceable_pincodes list OR matches main pincode
   return stores.find(store => 
-    store.serviceable_pincodes && 
+    (store.serviceable_pincodes && 
     Array.isArray(store.serviceable_pincodes) &&
-    store.serviceable_pincodes.includes(cleanPincode)
+    store.serviceable_pincodes.includes(cleanPincode)) ||
+    (store.pincode && store.pincode.trim() === cleanPincode)
   ) || null;
 }
