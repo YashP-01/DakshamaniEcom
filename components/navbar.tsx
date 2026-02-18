@@ -97,9 +97,14 @@ export default function Navbar() {
 
     // Listen for auth changes
     const supabase = createClient();
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
       setUser(session?.user ?? null);
       setAuthChecked(true); // Ensure it's marked as checked on auth state change
+
+      // Handle password recovery event
+      if (event === "PASSWORD_RECOVERY") {
+        router.push("/auth/set-password");
+      }
     });
 
     return () => subscription.unsubscribe();

@@ -18,21 +18,37 @@ export function useAdminAuth() {
         return;
       }
 
-      // Check if user is admin
+      // Check if user is admin (legacy system)
       const { data: customerData } = await supabase
         .from("customers")
         .select("is_admin, is_active")
         .eq("id", user.id)
         .single();
 
-      if (!customerData || !customerData.is_admin || !customerData.is_active) {
-        await supabase.auth.signOut();
-        router.push("/admin/login");
+      // Legacy admin check (backward compatible)
+      if (customerData?.is_admin && customerData.is_active) {
+        setIsAuthenticated(true);
         setIsLoading(false);
         return;
       }
 
-      setIsAuthenticated(true);
+      // Fallback: Check if user has any store assignments (new RBAC system)
+      const { data: assignments, error: assignmentError } = await supabase
+        .from("user_store_assignments")
+        .select("id")
+        .eq("user_id", user.id)
+        .limit(1);
+
+      if (!assignmentError && assignments && assignments.length > 0) {
+        // User has role assignments, allow access
+        setIsAuthenticated(true);
+        setIsLoading(false);
+        return;
+      }
+
+      // No admin access - sign out and redirect
+      await supabase.auth.signOut();
+      router.push("/admin/login");
       setIsLoading(false);
     };
 

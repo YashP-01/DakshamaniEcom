@@ -37,7 +37,7 @@ export default function AdminLogin() {
         throw new Error("Login failed");
       }
 
-      // Check if user is admin
+      // Check if user is admin or has RBAC role
       const { data: customerData, error: customerError } = await supabase
         .from("customers")
         .select("is_admin, is_active")
@@ -45,32 +45,61 @@ export default function AdminLogin() {
         .single();
 
       if (customerError) {
-        // Customer profile might not exist, create it
-        const { error: createError } = await supabase
-          .from("customers")
-          .insert({
-            id: authData.user.id,
-            email: authData.user.email || email,
-            is_admin: false, // Will be set manually in database
-            is_active: true,
-          });
+        // If error is "not found", customer profile doesn't exist
+        if (customerError.code === 'PGRST116') {
+          // Try to create customer profile
+          const { error: createError } = await supabase
+            .from("customers")
+            .insert({
+              id: authData.user.id,
+              email: authData.user.email || email,
+              is_admin: false, // Will be set manually in database
+              is_active: true,
+            });
 
-        if (createError) {
-          throw new Error("Failed to create customer profile");
+          if (createError) {
+            console.error("Failed to create customer profile:", createError);
+            throw new Error(`Failed to create customer profile: ${createError.message}`);
+          }
+
+          // After creating profile, check if they have RBAC role assignments
+          const { data: assignments } = await supabase
+            .from("user_store_assignments")
+            .select("id")
+            .eq("user_id", authData.user.id)
+            .limit(1);
+
+          if (!assignments || assignments.length === 0) {
+            throw new Error("You don't have admin access. Please contact administrator.");
+          }
+
+          // Has role assignments, allow login
+        } else {
+          // Some other error occurred
+          console.error("Error checking customer:", customerError);
+          throw new Error(`Database error: ${customerError.message}`);
+        }
+      } else {
+        // Customer profile exists, check admin status
+        if (!customerData.is_admin) {
+          // Not a legacy admin, check if they have RBAC role assignments
+          const { data: assignments } = await supabase
+            .from("user_store_assignments")
+            .select("id")
+            .eq("user_id", authData.user.id)
+            .limit(1);
+
+          if (!assignments || assignments.length === 0) {
+            await supabase.auth.signOut();
+            throw new Error("You don't have admin access. Please contact administrator.");
+          }
+          // Has role assignments, allow login
         }
 
-        throw new Error("You don't have admin access. Please contact administrator.");
-      }
-
-      if (!customerData.is_admin) {
-        // Sign out if not admin
-        await supabase.auth.signOut();
-        throw new Error("You don't have admin access. Please contact administrator.");
-      }
-
-      if (!customerData.is_active) {
-        await supabase.auth.signOut();
-        throw new Error("Your admin account is inactive. Please contact administrator.");
+        if (!customerData.is_active) {
+          await supabase.auth.signOut();
+          throw new Error("Your admin account is inactive. Please contact administrator.");
+        }
       }
 
       // Update last login
