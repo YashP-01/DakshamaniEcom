@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { Plus, Edit, Trash2, ArrowLeft, MapPin, GripVertical, Map } from "lucide-react";
+import { Plus, Edit, Trash2, ArrowLeft, MapPin, GripVertical, Map, Globe, AlertTriangle } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
@@ -51,6 +52,8 @@ export default function AdminStores() {
   const [editingStore, setEditingStore] = useState<Store | null>(null);
   const [mapSettings, setMapSettings] = useState<MapSettings | null>(null);
   const [draggedIndex, setDraggedIndex] = useState<number | null>(null);
+  const [serveEverywhere, setServeEverywhere] = useState(true);
+  const [togglingServe, setTogglingServe] = useState(false);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -121,7 +124,32 @@ export default function AdminStores() {
         map_image_url: data.map_image_url || "",
         description: data.description || "",
       });
+      // serve_everywhere defaults to true if column doesn't exist yet
+      setServeEverywhere(data.serve_everywhere !== false);
     }
+  };
+
+  const handleServeEverywhereToggle = async (checked: boolean) => {
+    if (!mapSettings?.id) return;
+    setTogglingServe(true);
+    const supabase = createClient();
+    const { error } = await supabase
+      .from("store_map_settings")
+      .update({ serve_everywhere: checked })
+      .eq("id", mapSettings.id);
+
+    if (error) {
+      toast({ title: "Error", description: error.message });
+    } else {
+      setServeEverywhere(checked);
+      toast({
+        title: checked ? "Serving Everywhere" : "Restricted Delivery Zones",
+        description: checked
+          ? "Orders are now accepted from all pincodes."
+          : "Orders will only be accepted from registered pincodes.",
+      });
+    }
+    setTogglingServe(false);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -363,6 +391,40 @@ export default function AdminStores() {
       </div>
 
       <div className="container mx-auto px-4 py-8">
+
+        {/* Delivery Zone Settings */}
+        <Card className="mb-6 border-2">
+          <CardContent className="p-5">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex items-start gap-3">
+                {serveEverywhere ? (
+                  <Globe className="h-6 w-6 text-green-600 mt-0.5 shrink-0" />
+                ) : (
+                  <AlertTriangle className="h-6 w-6 text-amber-500 mt-0.5 shrink-0" />
+                )}
+                <div>
+                  <h3 className="font-semibold text-base">Serve Everywhere</h3>
+                  <p className="text-sm text-gray-500 mt-0.5">
+                    {serveEverywhere
+                      ? "Currently accepting orders from all pincodes. Unknown pincodes show \"Warehouse Delivery\"."
+                      : "Restricted mode: customers with unregistered pincodes will see \"Not deliverable at your location\" and cannot place orders."}
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 shrink-0">
+                <span className={`text-sm font-medium ${serveEverywhere ? "text-green-700" : "text-gray-500"}`}>
+                  {serveEverywhere ? "ON" : "OFF"}
+                </span>
+                <Switch
+                  checked={serveEverywhere}
+                  onCheckedChange={handleServeEverywhereToggle}
+                  disabled={togglingServe}
+                />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
         {stores.length === 0 ? (
           <Card>
             <CardContent className="p-12 text-center">

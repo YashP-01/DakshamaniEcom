@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { CreditCard, Truck, MapPin, Phone, Mail, Plus, Check } from "lucide-react";
+import { CreditCard, Truck, MapPin, Phone, Mail, Plus, Check, AlertTriangle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -36,6 +36,7 @@ export default function CheckoutPage() {
   const [mounted, setMounted] = useState(false);
   const [stores, setStores] = useState<StoreLocation[]>([]);
   const [fulfillmentStore, setFulfillmentStore] = useState<StoreLocation | null>(null);
+  const [serveEverywhere, setServeEverywhere] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -135,6 +136,17 @@ export default function CheckoutPage() {
       
       if (data) {
         setStores(data);
+      }
+
+      // Load delivery zone setting
+      const { data: mapData } = await supabase
+        .from("store_map_settings")
+        .select("serve_everywhere")
+        .limit(1)
+        .single();
+      
+      if (mapData) {
+        setServeEverywhere(mapData.serve_everywhere !== false);
       }
     };
 
@@ -686,30 +698,49 @@ export default function CheckoutPage() {
                     </CardHeader>
                     <CardContent className="space-y-4">
                       {/* Fulfillment Status */}
-                      <div className={`p-3 rounded-lg border flex items-start gap-3 ${
-                        fulfillmentStore 
-                          ? "bg-green-50 border-green-200" 
-                          : "bg-gray-50 border-gray-200"
-                      }`}>
-                        {fulfillmentStore ? (
-                          <Store className="h-5 w-5 text-green-600 mt-0.5" />
-                        ) : (
-                          <Truck className="h-5 w-5 text-gray-500 mt-0.5" />
-                        )}
-                        <div>
-                          <p className={`text-sm font-medium ${
-                            fulfillmentStore ? "text-green-800" : "text-gray-700"
+                      {(() => {
+                        const hasValidPincode = formData.pincode.length >= 6;
+                        const isNotDeliverable = !serveEverywhere && hasValidPincode && !fulfillmentStore;
+
+                        if (isNotDeliverable) {
+                          return (
+                            <div className="p-3 rounded-lg border bg-red-50 border-red-200 flex items-start gap-3">
+                              <AlertTriangle className="h-5 w-5 text-red-500 mt-0.5" />
+                              <div>
+                                <p className="text-sm font-semibold text-red-700">Not deliverable at your location</p>
+                                <p className="text-xs text-red-500 mt-0.5">We don&apos;t currently deliver to pincode {formData.pincode}. Please contact us or try a different address.</p>
+                              </div>
+                            </div>
+                          );
+                        }
+
+                        return (
+                          <div className={`p-3 rounded-lg border flex items-start gap-3 ${
+                            fulfillmentStore 
+                              ? "bg-green-50 border-green-200" 
+                              : "bg-gray-50 border-gray-200"
                           }`}>
-                            {fulfillmentStore ? "Fulfilled by Store" : "Warehouse Delivery"}
-                          </p>
-                          <p className="text-xs text-gray-600 mt-0.5">
-                            {fulfillmentStore 
-                              ? `Your order will be delivered from: ${fulfillmentStore.name}`
-                              : "Standard shipping from central warehouse."
-                            }
-                          </p>
-                        </div>
-                      </div>
+                            {fulfillmentStore ? (
+                              <Store className="h-5 w-5 text-green-600 mt-0.5" />
+                            ) : (
+                              <Truck className="h-5 w-5 text-gray-500 mt-0.5" />
+                            )}
+                            <div>
+                              <p className={`text-sm font-medium ${
+                                fulfillmentStore ? "text-green-800" : "text-gray-700"
+                              }`}>
+                                {fulfillmentStore ? "Fulfilled by Store" : "Warehouse Delivery"}
+                              </p>
+                              <p className="text-xs text-gray-600 mt-0.5">
+                                {fulfillmentStore 
+                                  ? `Your order will be delivered from: ${fulfillmentStore.name}`
+                                  : "Standard shipping from central warehouse."
+                                }
+                              </p>
+                            </div>
+                          </div>
+                        );
+                      })()}
 
                       <div className="space-y-2">
                         <div className="flex justify-between">
@@ -725,7 +756,7 @@ export default function CheckoutPage() {
                         type="submit"
                         className="w-full"
                         size="lg"
-                        disabled={loading}
+                        disabled={loading || (!serveEverywhere && formData.pincode.length >= 6 && !fulfillmentStore)}
                       >
                         <CreditCard className="h-5 w-5 mr-2" />
                         {loading ? "Processing..." : "Pay Now"}

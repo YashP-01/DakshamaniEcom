@@ -631,7 +631,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Package, Tag, Gift, LogOut, ShoppingBag, LayoutGrid, MessageSquare, MapPin, Phone, FileText, ArrowLeftRight, Printer, TrendingUp, TrendingDown, DollarSign, Users, Activity, Clock, CheckCircle, AlertCircle, BarChart3, Calendar, RefreshCw, PanelLeftOpen, PanelLeftClose } from "lucide-react";
+import { Package, Tag, Gift, LogOut, ShoppingBag, LayoutGrid, MessageSquare, MapPin, Phone, FileText, ArrowLeftRight, Printer, TrendingUp, TrendingDown, DollarSign, Users, Activity, Clock, CheckCircle, AlertCircle, BarChart3, Calendar, RefreshCw, PanelLeftOpen, PanelLeftClose, Shield } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -930,6 +930,13 @@ export default function AdminDashboard() {
       icon: FileText,
       href: "/admin/policy",
       color: "bg-indigo-500",
+    },
+    {
+      title: "Roles & Permissions",
+      description: "Manage staff roles",
+      icon: Shield,
+      href: "/admin/roles",
+      color: "bg-rose-500",
     },
   ];
 

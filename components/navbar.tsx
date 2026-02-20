@@ -27,6 +27,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { createClient } from "@/lib/supabase/client";
+import { toast } from "@/hooks/use-toast";
 
 interface Offer {
   id: string;
@@ -106,6 +107,24 @@ export default function Navbar() {
         router.push("/auth/set-password");
       }
     });
+
+    // Check for errors in URL hash (e.g. expired links)
+    if (typeof window !== "undefined" && window.location.hash) {
+      const hashParams = new URLSearchParams(window.location.hash.substring(1));
+      const error = hashParams.get("error");
+      const errorDescription = hashParams.get("error_description");
+
+      if (error) {
+        toast({
+          title: "Authentication Error",
+          description: errorDescription?.replace(/\+/g, " ") || "An error occurred during authentication",
+          variant: "destructive",
+        });
+        
+        // Clear the hash to clean up the URL
+        window.history.replaceState(null, "", window.location.pathname);
+      }
+    }
 
     return () => subscription.unsubscribe();
   }, []);
