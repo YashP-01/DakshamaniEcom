@@ -640,13 +640,15 @@ export default function CheckoutPage() {
                               <Input
                                 id="pincode"
                                 required
+                                inputMode="numeric"
+                                maxLength={6}
+                                minLength={6}
+                                placeholder="6-digit pincode"
                                 value={formData.pincode}
-                                onChange={(e) =>
-                                  setFormData({
-                                    ...formData,
-                                    pincode: e.target.value,
-                                  })
-                                }
+                                onChange={(e) => {
+                                  const digits = e.target.value.replace(/\D/g, "").slice(0, 6);
+                                  setFormData({ ...formData, pincode: digits });
+                                }}
                               />
                             </div>
                           </div>
